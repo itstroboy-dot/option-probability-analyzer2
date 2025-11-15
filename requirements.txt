@@ -1,6 +1,8 @@
-streamlit
-yfinance
-pandas
-numpy
-scipy
-plotly
+streamlit==1.38.0
+yfinance==0.2.40
+pandas==2.2.2
+numpy==1.26.4
+scipy==1.13.1
+plotly==5.22.0
+websockets==13.0.1  # yfinance 웹소켓 지원
+requests==2.32.3     # HTTP 요청 보강
