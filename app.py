@@ -21,10 +21,19 @@ with st.sidebar:
 
 @st.cache_data(ttl=300)
 def get_market_data(ticker):
-    stock = yf.Ticker(ticker)
-    price = stock.history(period="1d")['Close'].iloc[-1]
-    expirations = stock.options
-    return price, expirations, stock
+    try:
+        stock = yf.Ticker(ticker)
+        hist = stock.history(period="1d")
+        if hist.empty:
+            raise ValueError("No history data")
+        price = hist['Close'].iloc[-1]
+        expirations = stock.options
+        if not expirations:
+            raise ValueError("No options data")
+        return price, expirations, stock
+    except Exception as e:
+        st.error(f"데이터 로드 오류: {str(e)}. 인터넷 연결이나 티커 확인하세요.")
+        raise
 
 def black_scholes_call(S, K, T, r, sigma):
     d1 = (np.log(S/K) + (r + 0.5*sigma**2)*T) / (sigma*np.sqrt(T))
