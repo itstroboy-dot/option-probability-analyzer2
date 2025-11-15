@@ -1,4 +1,4 @@
-# app.py
+# app.py (맨 위 수정 버전)
 import streamlit as st
 import yfinance as yf
 import pandas as pd
@@ -6,6 +6,10 @@ import numpy as np
 from scipy.stats import norm
 from datetime import datetime
 import plotly.graph_objects as go
+import warnings
+warnings.filterwarnings("ignore")  # 불필요한 경고 무시
+
+# 나머지 코드는 그대로! (get_market_data 함수에 try-except 이미 있음)
 
 st.set_page_config(page_title="옵션 달성 확률 분석기", layout="centered")
 st.title("미국 주식 옵션 달성 가능성 분석기")
